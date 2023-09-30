@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutType) => {
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Navbar />
-          <main className="flex justify-center items-center p-4">
+          <main className="flex justify-center items-center p-4 mt-12">
             {children}
           </main>
         </ThemeProvider>
