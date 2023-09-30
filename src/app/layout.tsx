@@ -1,6 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
 
+import { ThemeProvider } from '@/components/ThemeProvider';
+import Navbar from '@/components/Navbar/Navbar';
+
 export const metadata: Metadata = {
   title: 'Next-Chess',
   description: 'NextJS Chess Game',
@@ -13,7 +16,14 @@ type LayoutType = {
 const Layout = ({ children }: LayoutType) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <Navbar />
+          <main className="flex justify-center items-center p-4">
+            {children}
+          </main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 };
