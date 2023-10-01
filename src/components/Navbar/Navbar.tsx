@@ -4,9 +4,7 @@ const Navbar = () => {
   return (
     <nav className="border-b">
       <div className="flex flex-wrap items-center justify-center mx-auto pt-4">
-        <Link
-          className="self-center text-2xl font-semibold text-white"
-          href={'/'}>
+        <Link className="self-center text-2xl font-semibold" href={'/'}>
           Next-Chess
         </Link>
       </div>

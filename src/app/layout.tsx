@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutType) => {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+        <ThemeProvider attribute="class" defaultTheme="light">
           <Navbar />
           <main>{children}</main>
         </ThemeProvider>
