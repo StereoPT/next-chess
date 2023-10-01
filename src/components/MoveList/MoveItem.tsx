@@ -8,8 +8,8 @@ type MoveItemType = {
 
 const MoveItem = ({ move }: MoveItemType) => {
   return (
-    <li className="flex justify-between gap-x-6 py-5">
-      <div className="flex min-w-0 gap-x-4">
+    <li className="flex justify-between gap-x-6 py-2 px-4">
+      <div className="flex min-w-0 gap-x-6">
         <Image
           className="flex-none rounded-full"
           src={getPieceSrc(move.color, move.piece)}

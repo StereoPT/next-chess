@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Chess, Move } from 'chess.js';
+import { Chess, Move, Square } from 'chess.js';
+import { Piece } from 'react-chessboard/dist/chessboard/types';
 
 const useChess = () => {
   const [game, setGame] = useState(new Chess());
+  const [playing, setPlaying] = useState(false);
   const [moves, setMoves] = useState<Move[]>([]);
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
 
@@ -15,6 +17,8 @@ const useChess = () => {
   };
 
   const makeRandomMove = () => {
+    if (!playing) return;
+
     const possibleMoves = game.moves();
     if (game.game_over() || game.in_draw() || possibleMoves.length <= 0) return;
 
@@ -23,9 +27,29 @@ const useChess = () => {
 
     if (move == null) return false;
     setMoves((prevMoves) => [move, ...prevMoves]);
+  };
 
-    const newTimeout = setTimeout(makeRandomMove, 500);
+  const onPieceDrop = (
+    sourceSquare: Square,
+    targetSquare: Square,
+    piece: Piece
+  ) => {
+    if (!playing) return false;
+
+    const gameCopy = { ...game };
+    const move = gameCopy.move({
+      from: sourceSquare,
+      to: targetSquare,
+      promotion: 'q',
+    });
+    setGame(gameCopy);
+
+    if (move === null) return false;
+    setMoves((prevMoves) => [move, ...prevMoves]);
+
+    const newTimeout = setTimeout(makeRandomMove, 200);
     setCurrentTimeout(newTimeout);
+    return true;
   };
 
   const resetGame = () => {
@@ -36,12 +60,15 @@ const useChess = () => {
     setMoves([]);
 
     if (currentTimeout) clearTimeout(currentTimeout);
+    setPlaying(false);
   };
 
   return {
     game,
+    playing,
+    setPlaying,
     moves,
-    makeRandomMove,
+    onPieceDrop,
     resetGame,
   };
 };
