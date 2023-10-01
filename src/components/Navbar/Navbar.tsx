@@ -8,11 +8,16 @@ const Navbar = () => {
           Next-Chess
         </Link>
       </div>
-      <div className="flex flex-wrap items-center justify-center mx-auto pt-2 pb-4">
+      <div className="flex flex-wrap items-center justify-center gap-8 text-center mx-auto pt-2 pb-4">
         <Link
           className="transition-colors hover:text-foreground/80 text-foreground/60"
           href={'/random'}>
           Random
+        </Link>
+        <Link
+          className="transition-colors hover:text-foreground/80 text-foreground/60"
+          href={'/computer'}>
+          Computer
         </Link>
       </div>
     </nav>

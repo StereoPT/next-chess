@@ -5,9 +5,9 @@ import { Chessboard } from 'react-chessboard';
 import Controls from '@/components/Controls/Controls';
 import MoveList from '@/components/MoveList/MoveList';
 
-const RandomPage = () => {
+const ComputerPage = () => {
   const { game, moves, playing, setPlaying, onPieceDrop, resetGame } = useChess(
-    { type: 'random' }
+    { type: 'computer' }
   );
 
   const startGame = () => {
@@ -45,4 +45,4 @@ const RandomPage = () => {
   );
 };
 
-export default RandomPage;
+export default ComputerPage;
