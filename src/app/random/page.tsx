@@ -30,6 +30,8 @@ const RandomPage = () => {
   };
 
   const startGame = () => {
+    resetGame();
+
     makeRandomMove();
   };
 
@@ -38,7 +40,7 @@ const RandomPage = () => {
     gameCopy.reset();
     setGame(gameCopy);
 
-    clearTimeout(currentTimeout);
+    if (currentTimeout) clearTimeout(currentTimeout);
   };
 
   return (
@@ -52,7 +54,7 @@ const RandomPage = () => {
           }}
         />
       </div>
-      <div>
+      <div className="flex gap-4">
         <Button variant="outline" onClick={() => startGame()}>
           Start Game
         </Button>
