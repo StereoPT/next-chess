@@ -22,20 +22,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-{
-  /* 
-    <nav
-      className={cn('flex items-center space-x-4 lg:space-x-6', className)}
-      {...props}>
-      <Link href="/" className="font-bold hover:text-primary">
-        
-      </Link>
-      <Link
-        href="/random"
-        className="text-sm font-medium  hover:text-primary">
-        Random
-      </Link>
-    </nav>
-*/
-}

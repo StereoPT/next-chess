@@ -1,12 +1,13 @@
 'use client';
 import { useState } from 'react';
 
-import { Chess } from 'chess.js';
+import { Chess, Move } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
 import { Button } from '@/components/ui/button';
 
 const RandomPage = () => {
   const [game, setGame] = useState(new Chess());
+  const [moves, setMoves] = useState<Move[]>([]);
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
 
   const makeMove = (move: string) => {
@@ -25,6 +26,8 @@ const RandomPage = () => {
     const move = makeMove(possibleMoves[randomIndex]);
 
     if (move == null) return false;
+    setMoves((prevMoves) => [move, ...prevMoves]);
+
     const newTimeout = setTimeout(makeRandomMove, 500);
     setCurrentTimeout(newTimeout);
   };
@@ -40,11 +43,13 @@ const RandomPage = () => {
     gameCopy.reset();
     setGame(gameCopy);
 
+    setMoves([]);
+
     if (currentTimeout) clearTimeout(currentTimeout);
   };
 
   return (
-    <div className="flex flex-col gap-8 justify-center items-center">
+    <div className="flex flex-col justify-center items-center gap-12 p-4 mt-8">
       <div className="w-[450px]">
         <Chessboard
           id="RandomChessBoard"
@@ -61,6 +66,17 @@ const RandomPage = () => {
         <Button variant="outline" onClick={() => resetGame()}>
           Reset Game
         </Button>
+      </div>
+      <div className="flex flex-col gap-4 justify-center items-center">
+        <h2 className="text-2xl font-bold">Game Log</h2>
+        {moves?.map((move) => {
+          return (
+            <p key={move.san}>
+              {move.color} Turn - Moved: {move.piece} | From: {move.from} | To:{' '}
+              {move.to}
+            </p>
+          );
+        })}
       </div>
     </div>
   );
