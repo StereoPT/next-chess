@@ -1,11 +1,9 @@
 'use client';
-import Image from 'next/image';
-
-import { Button } from '@/components/ui/button';
-
 import useChess from '@/hooks/useChess';
 
 import { Chessboard } from 'react-chessboard';
+import Controls from '@/components/Controls/Controls';
+import MoveList from '@/components/MoveList/MoveList';
 
 const RandomPage = () => {
   const { game, moves, makeRandomMove, resetGame } = useChess();
@@ -26,38 +24,11 @@ const RandomPage = () => {
               borderRadius: '8px',
             }}
           />
-          <div className="flex gap-4 mt-4">
-            <Button onClick={() => startGame()}>Start Game</Button>
-            <Button onClick={() => resetGame()}>Reset Game</Button>
-          </div>
+          <Controls startGame={startGame} resetGame={resetGame} />
         </div>
       </div>
       <div className="flex justify-center w-1/2">
-        <ul className="max-h-[450px] h-[450px] w-[450px] overflow-scroll divide-y">
-          {moves?.map((move, index) => {
-            return (
-              <li className="flex justify-between gap-x-6 py-5" key={index}>
-                <div className="flex min-w-0 gap-x-4">
-                  <Image
-                    className="flex-none rounded-full"
-                    src={`assets/${move.color}_${move.piece}.svg`}
-                    alt="Chess Piece"
-                    width={45}
-                    height={45}
-                  />
-                  <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">
-                      {move.color === 'b' ? 'Black' : 'White'} Move
-                    </p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                      From: {move.from} | To: {move.to}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <MoveList moves={moves} />
       </div>
     </div>
   );
