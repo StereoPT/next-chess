@@ -2,16 +2,17 @@ import { useState } from 'react';
 import { Chess, Move, ShortMove, Square } from 'chess.js';
 import { evaluateBoard } from '@/helpers/chess';
 
-type useChessType = {
+export type ChessType = {
   type: 'random' | 'computer';
 };
 
-const useChess = ({ type }: useChessType) => {
+const useChess = ({ type }: ChessType) => {
   const [game, setGame] = useState(new Chess());
   const [playing, setPlaying] = useState(false);
   const [moves, setMoves] = useState<Move[]>([]);
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
 
+  // TODO: Change this into a {key: value} object
   const getComputerType = () => {
     if (type === 'random') return makeRandomMove;
     return calculateBestMove;
@@ -68,7 +69,7 @@ const useChess = ({ type }: useChessType) => {
 
     if (move === null) return false;
 
-    const newTimeout = setTimeout(getComputerType(), 200);
+    const newTimeout = setTimeout(getComputerType(), 500);
     setCurrentTimeout(newTimeout);
     return true;
   };
@@ -84,12 +85,17 @@ const useChess = ({ type }: useChessType) => {
     setPlaying(false);
   };
 
+  const startGame = () => {
+    resetGame();
+    setPlaying(true);
+  };
+
   return {
     game,
     playing,
-    setPlaying,
     moves,
     onPieceDrop,
+    startGame,
     resetGame,
   };
 };
