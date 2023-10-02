@@ -1,9 +1,7 @@
-'use client';
-
 import ChessGame from '@/components/ChessGame/ChessGame';
 
 const ComputerPage = () => {
-  return <ChessGame type="computer" />;
+  return <ChessGame id="ComputerChessBoard" type="computer" />;
 };
 
 export default ComputerPage;

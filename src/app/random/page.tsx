@@ -1,9 +1,7 @@
-'use client';
-
 import ChessGame from '@/components/ChessGame/ChessGame';
 
 const RandomPage = () => {
-  return <ChessGame type="random" />;
+  return <ChessGame id="RandomChessBoard" type="random" />;
 };
 
 export default RandomPage;

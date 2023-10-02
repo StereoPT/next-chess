@@ -2,11 +2,9 @@ import { useState } from 'react';
 import { Chess, Move, ShortMove, Square } from 'chess.js';
 import { evaluateBoard } from '@/helpers/chess';
 
-export type ChessType = {
-  type: 'random' | 'computer';
-};
+export type ChessType = 'random' | 'computer';
 
-const useChess = ({ type }: ChessType) => {
+const useChess = (type: ChessType) => {
   const [game, setGame] = useState(new Chess());
   const [playing, setPlaying] = useState(false);
   const [moves, setMoves] = useState<Move[]>([]);
@@ -39,11 +37,13 @@ const useChess = ({ type }: ChessType) => {
   };
 
   const calculateBestMove = () => {
-    const turnMoves = game.moves();
+    const possibleMoves = game.moves();
+    if (game.game_over() || game.in_draw() || possibleMoves.length <= 0) return;
+
     let bestMove = null;
     let bestValue = -Infinity;
 
-    for (const move of turnMoves) {
+    for (const move of possibleMoves) {
       game.move(move);
       const boardValue = -evaluateBoard(game.board());
       game.undo();
