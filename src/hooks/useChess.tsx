@@ -8,6 +8,7 @@ const useChess = (type: ChessType) => {
   const [game, setGame] = useState(new Chess());
   const [playing, setPlaying] = useState(false);
   const [moves, setMoves] = useState<Move[]>([]);
+  const [depth, setDepth] = useState(3);
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
 
   // TODO: Change this into a {key: value} object
@@ -92,13 +93,13 @@ const useChess = (type: ChessType) => {
     const possibleMoves = game.moves();
     if (game.game_over() || game.in_draw() || possibleMoves.length <= 0) return;
 
-    const depth = 2;
+    const searchDepth = depth;
     let minimaxMove = null;
     let bestValue = -Infinity;
 
     for (const move of possibleMoves) {
       game.move(move);
-      const boardValue = minimax(depth - 1, game, false);
+      const boardValue = minimax(searchDepth - 1, game, false);
       game.undo();
 
       if (boardValue >= bestValue) {
@@ -147,6 +148,10 @@ const useChess = (type: ChessType) => {
     game,
     playing,
     moves,
+
+    depth,
+    setDepth,
+
     onPieceDrop,
     startGame,
     resetGame,
