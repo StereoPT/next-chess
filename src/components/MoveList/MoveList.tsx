@@ -7,7 +7,7 @@ type MoveListType = {
 
 const MoveList = ({ moves }: MoveListType) => {
   return (
-    <ul className="max-h-[450px] h-[450px] w-[450px] overflow-scroll divide-y border rounded-lg">
+    <ul className="max-h-[450px] h-[450px] w-[450px] overflow-y-auto divide-y border rounded-lg">
       {moves?.map((move, index) => (
         <MoveItem move={move} key={index} />
       ))}

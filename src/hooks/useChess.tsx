@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Chess, Move, ShortMove, Square } from 'chess.js';
+import { Chess, ChessInstance, Move, ShortMove, Square } from 'chess.js';
 import { evaluateBoard } from '@/helpers/chess';
 
-export type ChessType = 'random' | 'computer';
+export type ChessType = 'random' | 'computer' | 'minimax';
 
 const useChess = (type: ChessType) => {
   const [game, setGame] = useState(new Chess());
@@ -12,8 +12,10 @@ const useChess = (type: ChessType) => {
 
   // TODO: Change this into a {key: value} object
   const getComputerType = () => {
-    if (type === 'random') return makeRandomMove;
-    return calculateBestMove;
+    if (type === 'random') return calculateRandomMove;
+    else if (type === 'computer') return calculateBestMove;
+
+    return calculateMinimaxMove;
   };
 
   const makeMove = (move: string | ShortMove) => {
@@ -28,7 +30,7 @@ const useChess = (type: ChessType) => {
     return result;
   };
 
-  const makeRandomMove = () => {
+  const calculateRandomMove = () => {
     const possibleMoves = game.moves();
     if (game.game_over() || game.in_draw() || possibleMoves.length <= 0) return;
 
@@ -48,7 +50,7 @@ const useChess = (type: ChessType) => {
       const boardValue = -evaluateBoard(game.board());
       game.undo();
 
-      if (boardValue > bestValue) {
+      if (boardValue >= bestValue) {
         bestValue = boardValue;
         bestMove = move;
       }
@@ -56,6 +58,57 @@ const useChess = (type: ChessType) => {
 
     if (bestMove === null) return;
     makeMove(bestMove);
+  };
+
+  const minimax = (
+    depth: number,
+    game: ChessInstance,
+    isMaximizingPlayer: boolean
+  ) => {
+    if (depth <= 0) return -evaluateBoard(game.board());
+
+    const possibleMoves = game.moves();
+
+    let bestValue = isMaximizingPlayer ? -Infinity : Infinity;
+    for (const move of possibleMoves) {
+      game.move(move);
+      if (isMaximizingPlayer) {
+        bestValue = Math.max(
+          bestValue,
+          minimax(depth - 1, game, !isMaximizingPlayer)
+        );
+      } else {
+        bestValue = Math.min(
+          bestValue,
+          minimax(depth - 1, game, !isMaximizingPlayer)
+        );
+      }
+      game.undo();
+    }
+    return bestValue;
+  };
+
+  const calculateMinimaxMove = () => {
+    const possibleMoves = game.moves();
+    if (game.game_over() || game.in_draw() || possibleMoves.length <= 0) return;
+
+    const depth = 2;
+    let minimaxMove = null;
+    let bestValue = -Infinity;
+
+    for (const move of possibleMoves) {
+      game.move(move);
+      const boardValue = minimax(depth - 1, game, false);
+      game.undo();
+
+      if (boardValue >= bestValue) {
+        bestValue = boardValue;
+        minimaxMove = move;
+      }
+    }
+
+    if (minimaxMove === null) return;
+    makeMove(minimaxMove);
   };
 
   const onPieceDrop = (sourceSquare: Square, targetSquare: Square) => {

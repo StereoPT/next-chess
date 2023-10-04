@@ -41,6 +41,5 @@ const getPieceValue = (piece: BoardType) => {
   };
 
   const absoluteValue = getAbsoluteValue(piece.type);
-
   return piece.color === 'w' ? absoluteValue : -absoluteValue;
 };

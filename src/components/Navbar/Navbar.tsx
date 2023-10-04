@@ -1,5 +1,11 @@
 import Link from 'next/link';
 
+const ROUTES = [
+  { href: '/random', text: 'Random' },
+  { href: '/computer', text: 'Computer' },
+  { href: '/minimax', text: 'Minimax' },
+];
+
 const Navbar = () => {
   return (
     <nav className="border-b">
@@ -9,16 +15,14 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-8 text-center mx-auto pt-2 pb-4">
-        <Link
-          className="transition-colors hover:text-foreground/80 text-foreground/60"
-          href={'/random'}>
-          Random
-        </Link>
-        <Link
-          className="transition-colors hover:text-foreground/80 text-foreground/60"
-          href={'/computer'}>
-          Computer
-        </Link>
+        {ROUTES.map((route) => (
+          <Link
+            key={route.href}
+            className="transition-colors hover:text-foreground/80 text-foreground/60"
+            href={route.href}>
+            {route.text}
+          </Link>
+        ))}
       </div>
     </nav>
   );
