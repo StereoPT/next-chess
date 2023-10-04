@@ -44,7 +44,7 @@ const useChess = (type: ChessType) => {
     if (game.game_over() || game.in_draw() || possibleMoves.length <= 0) return;
 
     let bestMove = null;
-    let bestValue = -Infinity;
+    let bestValue = -9999;
 
     for (const move of possibleMoves) {
       game.move(move);
@@ -64,29 +64,43 @@ const useChess = (type: ChessType) => {
   const minimax = (
     depth: number,
     game: ChessInstance,
+    alpha: number,
+    beta: number,
     isMaximizingPlayer: boolean
   ) => {
     if (depth <= 0) return -evaluateBoard(game.board());
 
     const possibleMoves = game.moves();
 
-    let bestValue = isMaximizingPlayer ? -Infinity : Infinity;
-    for (const move of possibleMoves) {
-      game.move(move);
-      if (isMaximizingPlayer) {
+    if (isMaximizingPlayer) {
+      let bestValue = -9999;
+      for (const move of possibleMoves) {
+        game.move(move);
         bestValue = Math.max(
           bestValue,
-          minimax(depth - 1, game, !isMaximizingPlayer)
+          minimax(depth - 1, game, alpha, beta, !isMaximizingPlayer)
         );
-      } else {
+        game.undo();
+
+        alpha = Math.max(alpha, bestValue);
+        if (beta <= alpha) return bestValue;
+      }
+      return bestValue;
+    } else {
+      let bestValue = 9999;
+      for (const move of possibleMoves) {
+        game.move(move);
         bestValue = Math.min(
           bestValue,
-          minimax(depth - 1, game, !isMaximizingPlayer)
+          minimax(depth - 1, game, alpha, beta, !isMaximizingPlayer)
         );
+        game.undo();
+
+        beta = Math.min(beta, bestValue);
+        if (beta <= alpha) return bestValue;
       }
-      game.undo();
+      return bestValue;
     }
-    return bestValue;
   };
 
   const calculateMinimaxMove = () => {
@@ -95,11 +109,11 @@ const useChess = (type: ChessType) => {
 
     const searchDepth = depth;
     let minimaxMove = null;
-    let bestValue = -Infinity;
+    let bestValue = -9999;
 
     for (const move of possibleMoves) {
       game.move(move);
-      const boardValue = minimax(searchDepth - 1, game, false);
+      const boardValue = minimax(searchDepth - 1, game, -10000, 10000, false);
       game.undo();
 
       if (boardValue >= bestValue) {
