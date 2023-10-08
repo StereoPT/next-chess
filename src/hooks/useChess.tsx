@@ -11,7 +11,6 @@ const useChess = (type: ChessType) => {
   const [depth, setDepth] = useState(3);
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
 
-  // TODO: Change this into a {key: value} object
   const getComputerType = () => {
     if (type === 'random') return calculateRandomMove;
     else if (type === 'computer') return calculateBestMove;
