@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Chess, ChessInstance, Move, ShortMove, Square } from 'chess.js';
+import { Chess, Move, ShortMove, Square } from 'chess.js';
 import { evaluateBoard } from '@/helpers/chess';
+import { minimax } from '@/helpers/minimax';
 
 export type ChessType = 'random' | 'computer' | 'minimax';
 
@@ -58,48 +59,6 @@ const useChess = (type: ChessType) => {
 
     if (bestMove === null) return;
     makeMove(bestMove);
-  };
-
-  const minimax = (
-    depth: number,
-    game: ChessInstance,
-    alpha: number,
-    beta: number,
-    isMaximizingPlayer: boolean
-  ) => {
-    if (depth <= 0) return -evaluateBoard(game.board());
-
-    const possibleMoves = game.moves();
-
-    if (isMaximizingPlayer) {
-      let bestValue = -9999;
-      for (const move of possibleMoves) {
-        game.move(move);
-        bestValue = Math.max(
-          bestValue,
-          minimax(depth - 1, game, alpha, beta, !isMaximizingPlayer)
-        );
-        game.undo();
-
-        alpha = Math.max(alpha, bestValue);
-        if (beta <= alpha) return bestValue;
-      }
-      return bestValue;
-    } else {
-      let bestValue = 9999;
-      for (const move of possibleMoves) {
-        game.move(move);
-        bestValue = Math.min(
-          bestValue,
-          minimax(depth - 1, game, alpha, beta, !isMaximizingPlayer)
-        );
-        game.undo();
-
-        beta = Math.min(beta, bestValue);
-        if (beta <= alpha) return bestValue;
-      }
-      return bestValue;
-    }
   };
 
   const calculateMinimaxMove = () => {
