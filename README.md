@@ -1,36 +1,166 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a name="readme-top"></a>
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<br />
+<div align="center">
+  <h3 align="center">Next-Chess</h3>
+
+  <!-- TODO: Fix Links? -->
+  <p align="center">
+    Chess Game made in Next!
+    <br />
+    <a href="https://github.com/StereoPT/next-chess"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/StereoPT/next-chess">View Demo</a>
+    ·
+    <a href="https://github.com/StereoPT/next-chess/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/StereoPT/next-chess/issues">Request Feature</a>
+  </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+## About The Project
+
+Next-Chess is a simple chess game made in NextJS.
+There are three chess oponents:
+
+- Random is _well, random_
+- Computer chooses the best possible move
+- Minimax chooses the best possible move seeing 3 moves ahead
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+- [![Next][Next.js]][Next-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps in order to setup the project locally.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Prerequisites
+
+- [node.js](https://nodejs.org/en/)
+
+### Installation
+
+1. Clone the repo
+
+```sh
+git clone https://github.com/StereoPT/next-chess.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install NPM Packages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+To run the script:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Deploy on Vercel
+## Roadmap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [x] Version 1.0
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+See the [open issues](https://github.com/StereoPT/next-chess/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE.md` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Your Name - [@stereopt](https://twitter.com/stereopt) - stereopt@gmail.com
+
+Project Link: [https://github.com/StereoPT/next-chess](https://github.com/StereoPT/next-chess)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/StereoPT/next-chess.svg?style=for-the-badge
+[contributors-url]: https://github.com/StereoPT/next-chess/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/StereoPT/next-chess.svg?style=for-the-badge
+[forks-url]: https://github.com/StereoPT/next-chess/network/members
+[stars-shield]: https://img.shields.io/github/stars/StereoPT/next-chess.svg?style=for-the-badge
+[stars-url]: https://github.com/StereoPT/repo_name/next-chess
+[issues-shield]: https://img.shields.io/github/issues/StereoPT/next-chess.svg?style=for-the-badge
+[issues-url]: https://github.com/StereoPT/next-chess/issues
+[license-shield]: https://img.shields.io/github/license/StereoPT/next-chess.svg?style=for-the-badge
+[license-url]: https://github.com/StereoPT/repo_name/blob/master/LICENSE.md
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/guidosp
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
